@@ -1,171 +1,425 @@
-// Little Canvas things
-var canvas = document.querySelector("#canvas"),
-    ctx = canvas.getContext('2d'); // Set Canvas to be window size
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight; // Configuration, Play with these
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var config = {
-  particleNumber: 200,
-  maxParticleSize: 10,
-  maxSpeed: 40,
-  colorVariation: 50
-}; // Colors
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var colorPalette = {
-  bg: {
-    r: 12,
-    g: 9,
-    b: 29
-  },
-  matter: [{
-    r: 227,
-    g: 27,
-    b: 35
-  }, 
-  {
-    r: 152,
-    g: 0,
-    b: 46
-  }, 
-  {
-    r: 111,
-    g: 18,
-    b: 96
-  }, 
-  {
-    r: 253,
-    g: 238,
-    b: 152
-  } // totesASun
-  ]
-}; // Some Variables hanging out
-
-var particles = [],
-    centerX = canvas.width / 2,
-    centerY = canvas.height / 2,
-    _drawBg,
-    // Draws the background for the canvas, because space
-_drawBg = function drawBg(ctx, color) {
-  ctx.fillStyle = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-}; // Particle Constructor
-
-
-var Particle = function Particle(x, y) {
-  // X Coordinate
-  this.x = x || Math.round(Math.random() * canvas.width); // Y Coordinate
-
-  this.y = y || Math.round(Math.random() * canvas.height); // Radius of the space dust
-
-  this.r = Math.ceil(Math.random() * config.maxParticleSize); // Color of the rock, given some randomness
-
-  this.c = colorVariation(colorPalette.matter[Math.floor(Math.random() * colorPalette.matter.length)], true); // Speed of which the rock travels
-
-  this.s = Math.pow(Math.ceil(Math.random() * config.maxSpeed), .7); // Direction the Rock flies
-
-  this.d = Math.round(Math.random() * 360);
-}; // Provides some nice color variation
-// Accepts an rgba object
-// returns a modified rgba object or a rgba string if true is passed in for argument 2
-
-
-var colorVariation = function colorVariation(color, returnString) {
-  var r, g, b, a, variation;
-  r = Math.round(Math.random() * config.colorVariation - config.colorVariation / 2 + color.r);
-  g = Math.round(Math.random() * config.colorVariation - config.colorVariation / 2 + color.g);
-  b = Math.round(Math.random() * config.colorVariation - config.colorVariation / 2 + color.b);
-  a = Math.random() + .5;
-
-  if (returnString) {
-    return "rgba(" + r + "," + g + "," + b + "," + a + ")";
-  } else {
-    return {
-      r,
-      g,
-      b,
-      a
-    };
-  }
-}; // Used to find the rocks next point in space, accounting for speed and direction
-
-
-var updateParticleModel = function updateParticleModel(p) {
-  var a = 180 - (p.d + 90); // find the 3rd angle
-
-  p.d > 0 && p.d < 180 ? p.x += p.s * Math.sin(p.d) / Math.sin(p.s) : p.x -= p.s * Math.sin(p.d) / Math.sin(p.s);
-  p.d > 90 && p.d < 270 ? p.y += p.s * Math.sin(a) / Math.sin(p.s) : p.y -= p.s * Math.sin(a) / Math.sin(p.s);
-  return p;
-}; // Just the function that physically draws the particles
-// Physically? sure why not, physically.
-
-
-var drawParticle = function drawParticle(x, y, r, c) {
-  ctx.beginPath();
-  ctx.fillStyle = c;
-  ctx.moveTo(x+75, y+40);
-  ctx.bezierCurveTo(x+75, y+37, x+70, y+25, x+50, y+25);
-  ctx.bezierCurveTo(x+20, y+25, x+20, y+62.5, x+20, y+62.5);
-  ctx.bezierCurveTo(x+20, y+80, x+40, y+102, x+75, y+120);
-  ctx.bezierCurveTo(x+110, y+102, x+130, y+80, x+130, y+62.5);
-  ctx.bezierCurveTo(x+130, y+62.5, x+130, y+25, x+100, y+25);
-  ctx.bezierCurveTo(x+85, y+25, x+75, y+37, x+75, y+40);
-
-  // ctx.bezierCurveTo(x, y, x-5, y-12, x-25, y-12);
-
-  ctx.fill();
-  ctx.closePath();
-}; // Remove particles that aren't on the canvas
-
-
-var cleanUpArray = function cleanUpArray() {
-  particles = particles.filter(p => {
-    return p.x > -100 && p.y > -100;
-  });
+const qs = document.querySelector.bind(document);
+const easingHeart = mojs.easing.path('M0,100C2.9,86.7,33.6-7.3,46-7.3s15.2,22.7,26,22.7S89,0,100,0');
+const el = {
+  container: qs('.mo-container'),
+  i: qs('.lttr--I'),
+  l: qs('.lttr--L'),
+  o: qs('.lttr--O'),
+  v: qs('.lttr--V'),
+  e: qs('.lttr--E'),
+  y: qs('.lttr--Y'),
+  o2: qs('.lttr--O2'),
+  u: qs('.lttr--U'),
+  lineLeft: qs('.line--left'),
+  lineRight: qs('.line--rght'),
+  colTxt: "#763c8c",
+  colHeart: "#fa4843",
+  blup: qs('.blup'),
+  blop: qs('.blop'),
+  sound: qs('.sound')
 };
 
-var initParticles = function initParticles(numParticles, x, y) {
-  for (let i = 0; i < numParticles; i++) {
-    particles.push(new Particle(x, y));
+class Heart extends mojs.CustomShape {
+  getShape() {
+    return '<path d="M50,88.9C25.5,78.2,0.5,54.4,3.8,31.1S41.3,1.8,50,29.9c8.7-28.2,42.8-22.2,46.2,1.2S74.5,78.2,50,88.9z"/>';
   }
 
-  particles.forEach(p => {
-    drawParticle(p.x, p.y, p.r, p.c);
+  getLength() {
+    return 200;
+  }
+
+}
+
+mojs.addShape('heart', Heart);
+
+const crtBoom = (delay = 0, x = 0, rd = 46) => {
+  parent = el.container;
+  const crcl = new mojs.Shape({
+    shape: 'circle',
+    fill: 'none',
+    stroke: el.colTxt,
+    strokeWidth: {
+      5: 0
+    },
+    radius: {
+      [rd]: [rd + 20]
+    },
+    easing: 'quint.out',
+    duration: 500 / 3,
+    parent,
+    delay,
+    x
   });
-}; // That thing
+  const brst = new mojs.Burst({
+    radius: {
+      [rd + 15]: 110
+    },
+    angle: 'rand(60, 180)',
+    count: 3,
+    timeline: {
+      delay
+    },
+    parent,
+    x,
+    children: {
+      radius: [5, 3, 7],
+      fill: el.colTxt,
+      scale: {
+        1: 0,
+        easing: 'quad.in'
+      },
+      pathScale: [.8, null],
+      degreeShift: ['rand(13, 60)', null],
+      duration: 1000 / 3,
+      easing: 'quint.out'
+    }
+  });
+  return [crcl, brst];
+};
 
-
-window.requestAnimFrame = function () {
-  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
-    window.setTimeout(callback, 1000 / 60);
+const crtLoveTl = () => {
+  const move = 1000;
+  const boom = 200;
+  const easing = 'sin.inOut';
+  const easingBoom = 'sin.in';
+  const easingOut = 'sin.out';
+  const opts = {
+    duration: move,
+    easing,
+    opacity: 1
   };
-}(); // Our Frame function
+  const delta = 150;
+  return new mojs.Timeline().add([new mojs.Tween({
+    duration: move,
+    onStart: () => {
+      [el.i, el.l, el.o, el.v, el.e, el.y, el.o2, el.u].forEach(el => {
+        el.style.opacity = 1;
+        el.style = 'transform: translate(0px, 0px) rotate(0deg) skew(0deg, 0deg) scale(1, 1); opacity: 1;';
+      });
+    },
+    onComplete: () => {
+      [el.l, el.o, el.v, el.e].forEach(el => el.style.opacity = 0);
+      el.blop.play();
+    }
+  }), new mojs.Tween({
+    duration: move * 2 + boom,
+    onComplete: () => {
+      [el.y, el.o2].forEach(el => el.style.opacity = 0);
+      el.blop.play();
+    }
+  }), new mojs.Tween({
+    duration: move * 3 + boom * 2 - delta,
+    onComplete: () => {
+      el.i.style.opacity = 0;
+      el.blop.play();
+    }
+  }), new mojs.Tween({
+    duration: move * 3 + boom * 2,
+    onComplete: () => {
+      el.u.style.opacity = 0;
+      el.blup.play();
+    }
+  }), new mojs.Tween({
+    duration: 50,
+    delay: 4050,
+    onUpdate: progress => {
+      [el.i, el.l, el.o, el.v, el.e, el.y, el.o2, el.u].forEach(el => {
+        el.style = `transform: translate(0px, 0px) rotate(0deg) skew(0deg, 0deg) scale(1, 1); opacity: ${1 * progress};`;
+      });
+    },
+    onComplete: () => {
+      [el.i, el.l, el.o, el.v, el.e, el.y, el.o2, el.u].forEach(el => {
+        el.style.opacity = 1;
+        el.style = 'transform: translate(0px, 0px) rotate(0deg) skew(0deg, 0deg) scale(1, 1); opacity: 1;';
+      });
+    }
+  }), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.lineLeft,
+    x: {
+      0: 52
+    }
+  })).then({
+    duration: boom + move,
+    easing,
+    x: {
+      to: 52 + 54
+    }
+  }).then({
+    duration: boom + move,
+    easing,
+    x: {
+      to: 52 + 54 + 60
+    }
+  }).then({
+    duration: 150,
+    // 3550
+    easing,
+    x: {
+      to: 52 + 54 + 60 + 10
+    }
+  }).then({
+    duration: 300
+  }).then({
+    duration: 350,
+    x: {
+      to: 0
+    },
+    easing: easingOut
+  }), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.lineRight,
+    x: {
+      0: -52
+    }
+  })).then({
+    duration: boom + move,
+    easing,
+    x: {
+      to: -52 - 54
+    }
+  }).then({
+    duration: boom + move,
+    easing,
+    x: {
+      to: -52 - 54 - 60
+    }
+  }).then({
+    duration: 150,
+    easing,
+    x: {
+      to: -52 - 54 - 60 - 10
+    }
+  }).then({
+    duration: 300
+  }).then({
+    duration: 350,
+    x: {
+      to: 0
+    },
+    easing: easingOut
+  }), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.i,
+    x: {
+      0: 34
+    }
+  })).then({
+    duration: boom,
+    easing: easingBoom,
+    x: {
+      to: 34 + 19
+    }
+  }).then({
+    duration: move,
+    easing,
+    x: {
+      to: 34 + 19 + 40
+    }
+  }).then({
+    duration: boom,
+    easing: easingBoom,
+    x: {
+      to: 34 + 19 + 40 + 30
+    }
+  }).then({
+    duration: move,
+    easing,
+    x: {
+      to: 34 + 19 + 40 + 30 + 30
+    }
+  }), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.l,
+    x: {
+      0: 15
+    }
+  })), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.o,
+    x: {
+      0: 11
+    }
+  })), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.v,
+    x: {
+      0: 3
+    }
+  })), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.e,
+    x: {
+      0: -3
+    }
+  })), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.y,
+    x: {
+      0: -20
+    }
+  })).then({
+    duration: boom,
+    easing: easingBoom,
+    x: {
+      to: -20 - 33
+    }
+  }).then({
+    duration: move,
+    easing,
+    x: {
+      to: -20 - 33 - 24
+    }
+  }), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.o2,
+    x: {
+      0: -27
+    }
+  })).then({
+    duration: boom,
+    easing: easingBoom,
+    x: {
+      to: -27 - 27
+    }
+  }).then({
+    duration: move,
+    easing,
+    x: {
+      to: -27 - 27 - 30
+    }
+  }), new mojs.Html(_objectSpread(_objectSpread({}, opts), {}, {
+    el: el.u,
+    x: {
+      0: -32
+    }
+  })).then({
+    duration: boom,
+    easing: easingBoom,
+    x: {
+      to: -32 - 21
+    }
+  }).then({
+    duration: move,
+    easing,
+    x: {
+      to: -32 - 21 - 36
+    }
+  }).then({
+    duration: boom,
+    easing: easingBoom,
+    x: {
+      to: -32 - 21 - 36 - 31
+    }
+  }).then({
+    duration: move,
+    easing,
+    x: {
+      to: -32 - 21 - 36 - 31 - 27
+    }
+  }), new mojs.Shape({
+    parent: el.container,
+    shape: 'heart',
+    delay: move,
+    fill: el.colHeart,
+    x: -64,
+    scale: {
+      0: 0.95,
+      easing: easingHeart
+    },
+    duration: 500
+  }).then({
+    x: {
+      to: -62,
+      easing
+    },
+    scale: {
+      to: 0.65,
+      easing
+    },
+    duration: boom + move - 500
+  }).then({
+    duration: boom - 50,
+    x: {
+      to: -62 + 48
+    },
+    scale: {
+      to: 0.90
+    },
+    easing: easingBoom
+  }).then({
+    duration: 125,
+    scale: {
+      to: 0.8
+    },
+    easing: easingOut
+  }).then({
+    duration: 125,
+    scale: {
+      to: 0.85
+    },
+    easing: easingOut
+  }).then({
+    duration: move - 200,
+    scale: {
+      to: 0.45
+    },
+    easing
+  }).then({
+    delay: -75,
+    duration: 150,
+    x: {
+      to: 0
+    },
+    scale: {
+      to: 0.90
+    },
+    easing: easingBoom
+  }).then({
+    duration: 125,
+    scale: {
+      to: 0.8
+    },
+    easing: easingOut
+  }).then({
+    duration: 125,
+    // 3725
+    scale: {
+      to: 0.85
+    },
+    easing: easingOut
+  }).then({
+    duration: 125 // 3850
 
+  }).then({
+    duration: 350,
+    scale: {
+      to: 0
+    },
+    easing: easingOut
+  }), ...crtBoom(move, -64, 46), ...crtBoom(move * 2 + boom, 18, 34), ...crtBoom(move * 3 + boom * 2 - delta, -64, 34), ...crtBoom(move * 3 + boom * 2, 45, 34)]);
+};
 
-var frame = function frame() {
-  // Draw background first
-  _drawBg(ctx, colorPalette.bg); // Update Particle models to new position
+const loveTl = crtLoveTl().play();
+setInterval(() => {
+  loveTl.replay();
+}, 4300);
+const volume = 0.2;
+el.blup.volume = volume;
+el.blop.volume = volume;
 
+const toggleSound = () => {
+  let on = true;
+  return () => {
+    if (on) {
+      el.blup.volume = 0.0;
+      el.blop.volume = 0.0;
+      el.sound.classList.add('sound--off');
+    } else {
+      el.blup.volume = volume;
+      el.blop.volume = volume;
+      el.sound.classList.remove('sound--off');
+    }
 
-  particles.map(p => {
-    return updateParticleModel(p);
-  }); // Draw em'
+    on = !on;
+  };
+};
 
-  particles.forEach(p => {
-    drawParticle(p.x, p.y, p.r, p.c);
-  }); // Play the same song? Ok!
-
-  window.requestAnimFrame(frame);
-}; // Click listener
-
-
-document.body.addEventListener("click", function (event) {
-  var x = event.clientX,
-      y = event.clientY;
-  cleanUpArray();
-  initParticles(config.particleNumber, x, y);
-}); // First Frame
-
-frame(); // First particle explosion
-
-initParticles(config.particleNumber);
+el.sound.addEventListener('click', toggleSound());
