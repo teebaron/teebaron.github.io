@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Butterfly+Kids|Roboto');
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 0px;
+}
+
+.grid-item {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  height: 3em;
+  width: 3em;
+  font-size: 2em;
+  text-align: center;
+}
+
+.Title {
+  font-size: 75px;
+  line-height: 1.1;
+  color: rgba(255,255,255,1);
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: center;
+}
+
+body {
+  background-color: lightblue;
+  font-family: 'Roboto', sans-serif;
+}
