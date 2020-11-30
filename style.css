@@ -187,10 +187,12 @@ label {
 
 .door .back {
   background-color: #2e313d;
+  color: white;
   text-align: center;
   word-wrap: break-word;
   font-size: 1em;
   transform: rotateY(180deg);
+  -webkit-transform:rotateY(180deg);
 }
 
 label:hover .door {
@@ -199,6 +201,7 @@ label:hover .door {
 
 :checked + .door {
   transform: rotateY(180deg);
+  -webkit-transform:rotateY(180deg);
 }
 
 
