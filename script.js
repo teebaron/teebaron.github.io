@@ -109,7 +109,7 @@ Array.from(allDoors).forEach((el) => {
 
 
 function days_to_xmas() {
-    const xmas = new Date(2020,11,24);
+    const xmas = new Date(2020,11,25);
     const now = new Date();
     console.log(xmas);
     console.log(now);
