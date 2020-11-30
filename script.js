@@ -46,8 +46,8 @@ var door_nr_array = [
     "🦌☃️🦌🦌🦌"];
 
 var counter = document.getElementById("counter");
-// const curDay = 24-days_to_xmas();
-const curDay = 5;
+const curDay = 24-days_to_xmas();
+// const curDay = 5;
 console.log("Today: " + curDay);
 counter.innerHTML = days_to_xmas();
 
