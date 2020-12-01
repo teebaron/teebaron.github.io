@@ -45,30 +45,6 @@ const door_nr_array = [
     "🎅🏼☃️🎅🏼🎅🏼☃️",
     "🦌☃️🦌🦌🦌"];
 
-const CONTENT_DAY = [
-    {
-        "type": 0,
-        "answers": [
-            {
-                "text": "Gestern",
-                "isRight": false
-            },
-            {
-                "text": "Übermorgen",
-                "isRight": true
-            },
-            {
-                "text": "Nächste Woche",
-                "isRight": false
-            }
-        ],
-        "right_resonse":     `<div><a href="https://www.youtube.com/embed/1tD41isys1o">Spiel die Musik!</a></div>
-        <div><iframe width="100%" height="315" src="https://www.youtube.com/embed/1tD41isys1o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>  
-        `,
-        "wrong_resonse": "😭"          
-    }
-];
-
 var counter = document.getElementById("counter");
 const curDay = 24-days_to_xmas();
 // const curDay = 2;
