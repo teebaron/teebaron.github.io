@@ -253,6 +253,7 @@ label:hover .door {
 
 /* Modal Content */
 .modal-content {
+  display: none;
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
@@ -309,3 +310,20 @@ label:hover .door {
 	top:1px;
 }
 
+/*Textbox*/
+/*https://codepen.io/zFunx/pen/GWPQNz*/
+input[type=text]{
+  width:100%;
+  border:2px solid #aaa;
+  border-radius:4px;
+  margin:8px 0;
+  outline:none;
+  padding:8px;
+  box-sizing:border-box;
+  transition:.3s;
+}
+
+input[type=text]:focus{
+  border-color:dodgerBlue;
+  box-shadow:0 0 8px 0 dodgerBlue;
+}

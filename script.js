@@ -19,7 +19,7 @@ function getRandomIcon(array) {
     return array[i];
 }
 
-var door_nr_array = [
+const door_nr_array = [
     "❄️❄️❄️❄️❄️",
     "☃️☃️☃️☃️🎅🏼",
     "☃️☃️☃️🦌☃️",
@@ -45,9 +45,33 @@ var door_nr_array = [
     "🎅🏼☃️🎅🏼🎅🏼☃️",
     "🦌☃️🦌🦌🦌"];
 
+const CONTENT_DAY = [
+    {
+        "type": 0,
+        "answers": [
+            {
+                "text": "Gestern",
+                "isRight": false
+            },
+            {
+                "text": "Übermorgen",
+                "isRight": true
+            },
+            {
+                "text": "Nächste Woche",
+                "isRight": false
+            }
+        ],
+        "right_resonse":     `<div><a href="https://www.youtube.com/embed/1tD41isys1o">Spiel die Musik!</a></div>
+        <div><iframe width="100%" height="315" src="https://www.youtube.com/embed/1tD41isys1o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>  
+        `,
+        "wrong_resonse": "😭"          
+    }
+];
+
 var counter = document.getElementById("counter");
 const curDay = 24-days_to_xmas();
-// const curDay = 5;
+// const curDay = 2;
 console.log("Today: " + curDay);
 counter.innerHTML = days_to_xmas();
 
@@ -68,32 +92,14 @@ Array.from(allDoors).forEach((el) => {
         back.onclick = function(ev) {
             checkbox.disabled = true; 
             var modal = document.getElementById("myModal");
+            var modalContent = document.getElementById("modal-content-" + day);
             var span = document.getElementsByClassName("close")[0];
             span.onclick = function() {
                 modal.style.display = "none";
+                modalContent.style.display = "none";
             }
             modal.style.display = "block";
-
-            //BTNs
-            var btn_1 = document.getElementById("btn_1");
-            var btn_2 = document.getElementById("btn_2");
-            var btn_3 = document.getElementById("btn_3");
-            console.log(btn_2);
-            console.log(btn_3);
-            var answer_wrong_div = document.getElementById("answer_wrong");
-            var answer_div = document.getElementById("answer");
-            btn_1.onclick = function() {
-                answer_wrong_div.style.display = "block";
-                answer_div.style.display = "none";
-            }
-            btn_2.onclick = function() {
-                answer_wrong_div.style.display = "none";
-                answer_div.style.display = "block";
-            }
-            btn_3.onclick = function() {
-                answer_wrong_div.style.display = "block";
-                answer_div.style.display = "none";
-            }
+            modalContent.style.display = "block";
         }
     }else if(curDay > day) {
         //past
@@ -107,6 +113,35 @@ Array.from(allDoors).forEach((el) => {
     }
 });
 
+function open_day(day){
+    var dayContent = CONTENT_DAY[day-1];
+    if(dayContent.type == 0){
+        
+    }
+}
+
+function showAnswer(btn,isRight){
+    var day_modal_conten = btn.parentElement;
+    var answer_wrong_div = day_modal_conten.querySelector("#answer_wrong");
+    var answer_div = day_modal_conten.querySelector("#answer");
+    var day = parseInt(day_modal_conten.getAttribute('value'));
+    if(isRight){
+        answer_wrong_div.style.display = "none";
+        answer_div.style.display = "block";
+        var answer_code = answer_div.querySelector("#code");
+        answer_code.innerHTML = door_nr_array[day-1];
+    }else{
+        answer_wrong_div.style.display = "block";
+        answer_div.style.display = "none";
+    }
+}
+
+function checkAnswer(btn,rightAnswer){
+    var day_modal_conten = btn.parentElement;
+    var input = day_modal_conten.querySelector("#fname").value;
+    console.log(input);
+    showAnswer(btn,input.toLowerCase() === rightAnswer.toLowerCase())
+}
 
 function days_to_xmas() {
     const xmas = new Date(2020,11,24);
@@ -122,3 +157,4 @@ function days_to_xmas() {
     return diff;
 
 }
+
