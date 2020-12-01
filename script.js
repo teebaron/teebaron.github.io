@@ -59,12 +59,12 @@ Array.from(allDoors).forEach((el) => {
     var front = el.getElementsByClassName("front")[0];
     var back = el.getElementsByClassName("back")[0];
     var day = parseInt(front.innerHTML);
-    console.log(day);
     
     if(curDay === day){
         //today
         checkbox.checked = false;
         checkbox.disabled = false;
+        back.innerHTML = "Click me!";
         back.onclick = function(ev) {
             checkbox.disabled = true; 
             var modal = document.getElementById("myModal");
