@@ -221,8 +221,8 @@ label {
   text-align: center;
   word-wrap: break-word;
   font-size: 1em;
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(179deg);
+  transform: rotateY(179deg);
 }
 
 label:hover .door {
@@ -230,8 +230,8 @@ label:hover .door {
 }
 
 :checked + .door {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(179deg);
+  transform: rotateY(179deg);
 }
 
 
