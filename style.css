@@ -221,7 +221,7 @@ label {
   color: white;
   text-align: center;
   word-wrap: break-word;
-  font-size: 1em;
+  font-size: 0.8em;
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }

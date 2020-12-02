@@ -46,8 +46,8 @@ const door_nr_array = [
     "🦌☃️🦌🦌🦌"];
 
 var counter = document.getElementById("counter");
-const curDay = 24-days_to_xmas();
-// const curDay = 2;
+//const curDay = 24-days_to_xmas();
+const curDay = 3;
 console.log("Today: " + curDay);
 counter.innerHTML = days_to_xmas();
 
@@ -60,8 +60,11 @@ Array.from(allDoors).forEach((el) => {
     var back = el.getElementsByClassName("back")[0];
     var day = parseInt(front.innerHTML);
     
+    //can open
+    console.log(curDay >= day);
+    console.log(day);
     if(curDay === day){
-        //today
+        //today or past
         checkbox.checked = false;
         checkbox.disabled = false;
         back.innerHTML = "Click me!";
@@ -82,6 +85,18 @@ Array.from(allDoors).forEach((el) => {
         checkbox.checked = true;
         checkbox.disabled = false;
         back.innerHTML = door_nr_array[day-1];
+        back.onclick = function(ev) {
+            checkbox.disabled = true; 
+            var modal = document.getElementById("myModal");
+            var modalContent = document.getElementById("modal-content-" + day);
+            var span = document.getElementsByClassName("close")[day-1];
+            span.onclick = function() {
+                modal.style.display = "none";
+                modalContent.style.display = "none";
+            }
+            modal.style.display = "block";
+            modalContent.style.display = "block";
+        }
     }else{
         //haha not now
         checkbox.checked = false;
