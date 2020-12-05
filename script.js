@@ -46,8 +46,8 @@ const door_nr_array = [
     "🦌☃️🦌🦌🦌"];
 
 var counter = document.getElementById("counter");
-//const curDay = 24-days_to_xmas();
-const curDay = 6;
+const curDay = 24-days_to_xmas();
+//const curDay = 14;
 console.log("Today: " + curDay);
 counter.innerHTML = days_to_xmas();
 
@@ -72,7 +72,7 @@ Array.from(allDoors).forEach((el) => {
             checkbox.disabled = true; 
             var modal = document.getElementById("myModal");
             var modalContent = document.getElementById("modal-content-" + day);
-            var span = document.getElementsByClassName("close")[day-1];
+            var span = modalContent.querySelector(".close");
             span.onclick = function() {
                 modal.style.display = "none";
                 modalContent.style.display = "none";
