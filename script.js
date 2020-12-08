@@ -84,7 +84,7 @@ Array.from(allDoors).forEach((el) => {
         //past
         checkbox.checked = true;
         checkbox.disabled = false;
-        back.innerHTML = door_nr_array[day-1];
+        back.innerHTML = `${day}<br>${door_nr_array[day-1]}`;
         back.onclick = function(ev) {
             checkbox.disabled = true; 
             var modal = document.getElementById("myModal");
