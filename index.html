@@ -486,7 +486,20 @@
     </div>
 
     <!-- Day 17 -->
-    <!-- Sprung -->
+    <div class="modal-content" id="modal-content-17" value="17">
+      <span class="close">&times;</span>
+      <p id="modal_text">Wie nennt Daenerys ihre Drachen?</p>
+      <input type="text" id="fname" name="fname">
+      <div class="myButton" id="btn_1" onclick="showAnswer(this,false)">Drogon, Viserion, Rhaegar</div>
+      <div class="myButton" id="btn_2" onclick="showAnswer(this,true)">Drogon, Viserion, Rhaegal</div>
+      <div class="myButton" id="btn_3" onclick="showAnswer(this,false)">Drogo, Viserys, Rhaegar</div>
+      <div class="myButton" id="btn_4" onclick="showAnswer(this,false)">Viserion, Rhaegal, Drogo</div>
+      <div class="answer" id="answer">
+        <div><span class="answer_code" id="code">?????</span></div>
+        <div id="answer_content"></div>
+      </div>
+      <div class="answer" id="answer_wrong">😭</div>
+    </div>
 
   </div>
   
