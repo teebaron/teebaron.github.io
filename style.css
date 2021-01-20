@@ -26,15 +26,11 @@ div.main-div div {
 }
 
 .centered {
-  display: table-cell;
-    height: 400px;
-    width: 800px;
-  text-align: center;
-  vertical-align: middle;
+  display: inline-block;
 }
 
 .container {
-  display: table;
+  text-align: center;
 }
 
 .test {
