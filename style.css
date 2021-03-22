@@ -1,5 +1,5 @@
 body  {
-  background-color : #ffceed;
+  background-color : #324d6a;
 }
 @keyframes heartfade {
   0% {
@@ -47,5 +47,6 @@ body  {
 }
 
 body {
-  font-family: 'Brush Script MT', cursive;
+  font-family: "Lucida Console", "Courier New", monospace;
+  color: rgb(255,255,255);
 }
