@@ -1,81 +1,51 @@
+body  {
+  background-color : #ffceed;
+}
+@keyframes heartfade {
+  0% {
+    opacity : 1;
+  }
+  50% {
+    opacity : 0;
+  }
+}
+.heart {
+  z-index : 999;
+  animation : heartfade 6s linear;
+  position : absolute; 
+}
+.heart:before,
+.heart:after {
+  content : "";
+  background-color : #fc2a62;
+  position : absolute;
+  height : 30px;
+  width : 45px;
+  border-radius : 15px 0px 0px 15px;
+}
+
+.heart:before {
+  transform : rotate(45deg);
+}
+
+.heart:after {
+  left : 10.5px;
+  transform : rotate(135deg);
+}
+
+.center {
+  padding: 70px 0;
+  text-align: center;
+  font-size: 2em;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 body {
-  background-color: #FFC568;
-}
-div {
-  padding: 10px 25px;
-  margin: 10px; 
-}
-
-div.main-div {
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 80px;
-  text-align: center;
-  font-weight: bold;
-  height: 300px;
-}
-
-div.main-div div {
-  display: inline-block;
-  margin: 50px 10px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px;
-  color: black;
-}
-
-.centered {
-  display: inline-block;
-}
-
-.container {
-  text-align: center;
-}
-
-.test {
-  text-align: center;
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 45px;
-  font-weight: bold;
-}
-
-.first {
-  color: darkviolet;
-  animation: swag 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite 0.4s;
-}
-
-@-webkit-keyframes swag {
-    form {
-        -webkit-transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
-@-moz-keyframes swag {
-    form {
-        -moz-transform: rotate(0deg);
-    }
-    to {
-        -moz-transform: rotate(360deg);
-    }
-}
-
-@-o-keyframes swag {
-    form {
-        -o-transform: rotate(0deg);
-    }
-    to {
-        -o-transform: rotate(360deg);
-    }
-}
-@keyframes swag {
-    form {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  font-family: 'Brush Script MT', cursive;
 }
