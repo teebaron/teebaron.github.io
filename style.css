@@ -1,52 +1,47 @@
-body  {
-  background-color : #324d6a;
+body {
+  background-color:black;
 }
-@keyframes heartfade {
+
+.output {
+  text-align:left;
+  font-family: 'Source Code Pro', monospace;
+  color:green;
+  h1 {
+    font-size:30px;
+  }
+}
+
+/* Cursor Styling */
+
+.cursor::after {
+  content:'';
+  display:inline-block;
+  margin-left:3px;
+  background-color:white;
+  animation-name:blink;
+  animation-duration:0.5s;
+  animation-iteration-count: infinite;
+}
+h1.cursor::after {
+  height:24px;
+  width:13px;
+}
+p.cursor::after {
+  height:13px;
+  width:6px;
+}
+
+@keyframes blink {
   0% {
-    opacity : 1;
+    opacity:1;
+  }
+  49% {
+    opacity:1;
   }
   50% {
-    opacity : 0;
+    opacity:0;
   }
-}
-.heart {
-  z-index : 999;
-  animation : heartfade 6s linear;
-  position : absolute; 
-}
-.heart:before,
-.heart:after {
-  content : "";
-  background-color : #fc2a62;
-  position : absolute;
-  height : 30px;
-  width : 45px;
-  border-radius : 15px 0px 0px 15px;
-}
-
-.heart:before {
-  transform : rotate(45deg);
-}
-
-.heart:after {
-  left : 10.5px;
-  transform : rotate(135deg);
-}
-
-.center {
-  padding: 70px 0;
-  text-align: center;
-  font-size: 2em;
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-}
-
-body {
-  font-family: "Lucida Console", "Courier New", monospace;
-  color: rgb(255,255,255);
+  100% {
+    opacity:0;
+  }
 }
