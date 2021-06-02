@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Typewrite CSS Animation</title>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="container py-5">
+      <div class="output" id="output">
+        <h1 id="cursor" class="cursor"></h1>
+        <h2 id="print" class="print"></h2>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script> 
+// values to keep track of the number of letters typed, which quote to use. etc. Don't change these values.
+var a = 0;
+
+// Typerwrite text content. Use a pipe to indicate the start of the second line "|".  
+
+var text = 
+`var BDay = 15.04.2021
+var person = "Dr. Somma"
+
+while (true){
+    if(BDay == DayTime.ToDay()){
+        print("Happy Birthday");
+        sleep(1000)
+    }
+}
+
+compile...............done
+`
+
+var lalal = "   A";
+console.log(lalal[0])
+// text = text.split("\n");
+
+
+// Speed (in milliseconds) of typing.
+var speedForward = 50; //Typing Speed
+var speedPrint = 1000;
+
+//Run the loop
+var textWrote = "";
+typeWriter(text);
+
+function typeWriter(textArray) {
+  var eHeader = document.getElementById("cursor")
+  var curLetter = aString = textArray[a];
+  if(curLetter == null){
+    console.log("done");
+    eHeader.className = "";
+    writeHappyBday()
+    return;
+  }
+
+      if(aString == "\n"){
+        textWrote += "<br>"
+      }
+      if(aString == " "){
+        aString = "&nbsp"
+      }
+      textWrote = textWrote + aString
+      eHeader.innerHTML = textWrote; //eHeader.text() + aString
+      a++;
+      setTimeout(function(){ typeWriter(textArray); }, speedForward);
+}
+
+function writeHappyBday(){
+  var eHeader = document.getElementById("print")
+  eHeader.innerHTML += "Happy Birthday<br>" 
+  setTimeout(function(){ writeHappyBday(); }, speedPrint);
+}
+
+</script>
