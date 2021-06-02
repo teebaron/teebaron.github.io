@@ -1,47 +1,36 @@
 body {
-  background-color:black;
+  background-color:#e74c3c;
 }
 
-.output {
-  text-align:left;
-  font-family: 'Source Code Pro', monospace;
-  color:green;
-  h1 {
-    font-size:30px;
-  }
+.containter{
+  /* min-height: 100vh;  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 2em;
 }
 
-/* Cursor Styling */
-
-.cursor::after {
-  content:'';
-  display:inline-block;
-  margin-left:3px;
-  background-color:white;
-  animation-name:blink;
-  animation-duration:0.5s;
-  animation-iteration-count: infinite;
-}
-h1.cursor::after {
-  height:24px;
-  width:13px;
-}
-p.cursor::after {
-  height:13px;
-  width:6px;
+.center {
+  fill: #c0392b;
+  position: relative;
+  top: 0px;
+  /* width: 50em; */
+  /* height: auto; */
+  animation: pulse 1s ease infinite;
+  margin: 0;
 }
 
-@keyframes blink {
-  0% {
-    opacity:1;
-  }
-  49% {
-    opacity:1;
-  }
-  50% {
-    opacity:0;
-  }
-  100% {
-    opacity:0;
-  }
+h1 {
+  text-align: center;
+  font-size: 10rem;
+  color: #ecf0f1;
+  font-family: 'Love Ya Like A Sister', cursive;
+  margin: 0;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
