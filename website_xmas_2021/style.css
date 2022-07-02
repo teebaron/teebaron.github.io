@@ -1,0 +1,36 @@
+body {
+  background-color:#e74c3c;
+}
+
+.containter{
+  /* min-height: 100vh;  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 2em;
+}
+
+.center {
+  fill: #c0392b;
+  position: relative;
+  top: 0px;
+  /* width: 50em; */
+  /* height: auto; */
+  animation: pulse 1s ease infinite;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 10rem;
+  color: #ecf0f1;
+  font-family: 'Love Ya Like A Sister', cursive;
+  margin: 0;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}

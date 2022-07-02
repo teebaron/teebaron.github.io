@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <title>Advenskalender 2021</title>
+  </head>
+  <body class="bg-secondary">
+    <div class="modal modal-sheet position-static d-block bg-secondary py-5"  id="modal"  tabindex="-1" role="dialog" id="modalSheet">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content rounded-6 shadow">
+            <div class="modal-header border-bottom-0">
+              <h5 class="modal-title text-center w-100">Tür <span id="door_day">11</span></h5>
+            </div>
+            <div class="modal-body py-0">
+              <p>Warum wird bei den Amerikanern Weihnachten, also "Christmas" oft auch "Xmas" genannt?</p>
+            </div>
+            <div class="modal-footer flex-column border-top-0">
+              <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2 btn-ans">Hört sich cooler an</button>
+              <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2 btn-ans">Lässt sich einfacher schreiben</button>
+              <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2 btn-ans ans_right">Weil "Christ" mit "x" anfängt</button>
+              <h1 id="ans_string">🍷</p>
+              <h1 id="ans_string_sol">🍷 Das X ist der erste Buchstabe des griechischen Wortes für Christus (ΧΡΙΣΤΟΣ) und wird auch als Abkürzung für Jesus bzw. Christus benutzt. Das -mas(s) dahinter steht für das englische Wort Messe/Mette. Zusammengesetzt heißt es also lediglich Christmesse.<br>⛪</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </body>
+
+  <script src="js/scrips.js"></script>
+</html>
